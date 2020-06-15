@@ -1,8 +1,12 @@
+package com.example.lab04;
+
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.lab04.Animal;
 
 public class MySQLite extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
