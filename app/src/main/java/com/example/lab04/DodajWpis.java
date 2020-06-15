@@ -11,6 +11,8 @@ import android.widget.Spinner;
 
 public class DodajWpis extends AppCompatActivity {
 
+    private int modyfi_id;
+
     public void wyslij(View view) {
         EditText kolor = (EditText) findViewById
                 (R.id.kolor);
@@ -26,6 +28,8 @@ public class DodajWpis extends AppCompatActivity {
                 Float.valueOf(wielkosc.getText().toString()),
                 opis.getText().toString()
         );
+        zwierze.set_Id(this.modyfi_id);
+
         Intent intencja = new Intent();
         intencja.putExtra("nowy", zwierze);
         setResult(RESULT_OK, intencja);
@@ -45,5 +49,21 @@ public class DodajWpis extends AppCompatActivity {
                 (R.id.gatunek);
         gatunek.setAdapter(gatunki);
 
+        Bundle extras = getIntent().getExtras();
+        try {
+            if(extras.getSerializable("element") != null) {
+                Animal zwierz = (Animal) extras.getSerializable("element");
+                EditText kolor = (EditText) findViewById(R.id.kolor);
+                EditText wielkość = (EditText) findViewById(R.id.wielkosc);
+                EditText opis = (EditText) findViewById(R.id.opis);
+                kolor.setText(zwierz.getKolor());
+                wielkość.setText(
+                        Float.toString(zwierz.getWielkosc()));
+                opis.setText(zwierz.getOpis());
+                this.modyfi_id=zwierz.get_id();
+            }
+        }catch(Exception ex) {
+            this.modyfi_id=0;
+        }
     }
 }
